@@ -1,4 +1,4 @@
 <resources>
-    <string name="app_name">Order food to your train</string>
+    <string name="app_name">Train Food DeliveryApp</string>
+    <string name="title_activity_train_maps">Map</string>
 </resources>
-

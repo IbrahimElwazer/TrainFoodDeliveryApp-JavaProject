@@ -170,7 +170,7 @@
         style="@style/Widget.AppCompat.Button.Colored"
         android:layout_width="240dp"
         android:layout_height="50dp"
-        android:background="@drawable/rounder_corners"
+        android:background="@drawable/rounded_corners"
         android:backgroundTint="#4E69FF"
         android:text="search"
         android:textColor="#FFFF"
