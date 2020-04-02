@@ -12,6 +12,8 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -20,6 +22,10 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -35,50 +41,87 @@ public class TrainMapsActivity extends FragmentActivity implements OnMapReadyCal
     RequestQueue queue = null;
     ArrayList<TrainStation> station = new ArrayList<TrainStation>();
 
-
-    protected void loadFromNetwork()
-    {
+    public static void setTimeout(Runnable runnable, int delay){
+        new Thread(() -> {
+            try {
+                Thread.sleep(delay);
+                runnable.run();
+            }
+            catch (Exception e){
+                System.err.println(e);
+            }
+        }).start();
+    };
+    protected void loadStation() {
         String station_url = "https://rata.digitraffic.fi/api/v1/metadata/stations";
-        String train_url = "https://rata.digitraffic.fi/api/v1/compositions/2017-08-01/1";
         final TextView netResult = findViewById(R.id.button);
 
-        StringRequest trainRequest = new StringRequest(Request.Method.GET,
-                train_url, new Response.Listener<String>() {
+        JsonArrayRequest stationRequest = new JsonArrayRequest(Request.Method.GET,
+                station_url, null, new Response.Listener<JSONArray>() {
             @Override
-            public void onResponse(String response) {
-                Log.i("response", response);
-            }
-        }, new Response.ErrorListener()
-            {
-                @Override
-                public void onErrorResponse(VolleyError error) {
-                    Log.i("error", error.getLocalizedMessage());
+            public void onResponse(JSONArray response) {
+                for (int i = 0; i < 6; i++) {
+                    try {
+                        JSONObject object = response.getJSONObject(i);
+                        String string = object.getString("stationName");
+                        TrainStation stationMarker = new TrainStation();
+                        stationMarker.setStationName(object.getString("stationName"));
+                        stationMarker.setLongitude(Double.parseDouble(object.getString("longitude")));
+                        stationMarker.setLatitude(Double.parseDouble(object.getString("latitude")));
+                        station.add(stationMarker);
+                        Log.i("station", string);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
                 }
             }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.i("error", error.getLocalizedMessage());
+            }
+        }
         );
-        StringRequest stationRequest = new StringRequest(Request.Method.GET,
-            station_url, new Response.Listener<String>() {
-        @Override
-        public void onResponse(String response) {
-            Log.i("response", response);
-        }
-    }, new Response.ErrorListener()
-    {
-        @Override
-        public void onErrorResponse(VolleyError error) {
-            Log.i("error", error.getLocalizedMessage());
-        }
-    }
-    );
-        queue.add(trainRequest);
+
         queue.add(stationRequest);
+        Log.i("hello","hello");
+    }
+    protected void loadTrain()
+    {
+        String train_url = "https://rata.digitraffic.fi/api/v1/trains/2020-04-01/24?version=0";
+        JsonArrayRequest trainRequest = new JsonArrayRequest(Request.Method.GET,
+                train_url, null, new Response.Listener<JSONArray>() {
+            @Override
+            public void onResponse(JSONArray response) {
+                //JSONArray jsonArray = response.getJSONArray("departureDate");
+                try {
+                    JSONObject train = response.getJSONObject(0);
+                    JSONArray timeTableList = train.getJSONArray("timeTableRows");
+                    for (int i = 0; i < timeTableList.length(); i++) {
+                        JSONObject timeAtStation = timeTableList.getJSONObject(i);
+                        String station = timeAtStation.getString("stationShortCode");
+                        Log.i("arrival station", station);
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.i("error", error.getLocalizedMessage());
+            }
+        }
+        );
+        queue.add(trainRequest);
     }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         queue = Volley.newRequestQueue(this);
-        loadFromNetwork();
-        TrainStation Oulu = new TrainStation();
+        loadTrain();
+        loadStation();
+        /*TrainStation Oulu = new TrainStation();
         Oulu.setStationName("Oulu");
         Oulu.setLatitude(65.012332);
         Oulu.setLongitude(25.484675);
@@ -87,7 +130,7 @@ public class TrainMapsActivity extends FragmentActivity implements OnMapReadyCal
         Tampere.setStationName("Tampere");
         Tampere.setLatitude(61.498657);
         Tampere.setLongitude(23.773124);
-        station.add(Tampere);
+        station.add(Tampere);*/
         setContentView(R.layout.activity_train_maps);
         findViewById(R.id.button).setOnClickListener(this);
 
@@ -127,7 +170,7 @@ public class TrainMapsActivity extends FragmentActivity implements OnMapReadyCal
     public void onClick(View v) {
         if (v.getId() == R.id.button)
         {
-           loadFromNetwork();
+           loadTrain();
         }
     }
 }
