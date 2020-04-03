@@ -4,15 +4,183 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#FFFF"
     tools:context=".MainActivity">
 
     <TextView
+        android:id="@+id/train_input_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
+        android:text="Start by entering your train journey information"
+        android:textAlignment="center"
+        android:textColor="#000000"
+        android:textSize="30dp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.084" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="70dp"
+        android:paddingBottom="5dp"
+        android:text="Departure City"
+        android:textColor="#000000"
+        android:textSize="16dp"
+        app:layout_constraintBottom_toTopOf="@id/departure_city_input"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="@id/departure_city_input"
+        app:layout_constraintRight_toRightOf="@id/departure_city_input"
+        app:layout_constraintTop_toBottomOf="@id/train_input_title"
+        app:layout_constraintVertical_bias="0.6" />
+
+    <EditText
+        android:id="@+id/departure_city_input"
+        android:layout_width="170dp"
+        android:layout_height="50dp"
+        android:background="@drawable/rounded_inputs"
+        android:hint="Enter city name..."
+        android:paddingLeft="8dp"
+        android:textColorHint="#B6A5A5"
+        android:textSize="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.095"
+        app:layout_constraintLeft_toLeftOf="@+id/departure_time_input"
+        app:layout_constraintRight_toRightOf="@+id/departure_time_input"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.361" />
+
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="70dp"
+        android:layout_marginRight="10dp"
+        android:paddingLeft="10dp"
+        android:paddingBottom="5dp"
+        android:text="Arrival City"
+        android:textColor="#000000"
+        android:textSize="16dp"
+        app:layout_constraintBottom_toTopOf="@id/arrival_city_input"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="@id/arrival_city_input"
+        app:layout_constraintRight_toRightOf="@+id/arrival_time_input"
+        app:layout_constraintTop_toBottomOf="@id/train_input_title"
+        app:layout_constraintVertical_bias="0.6" />
+
+    <EditText
+        android:id="@+id/arrival_city_input"
+        android:layout_width="170dp"
+        android:layout_height="50dp"
+        android:layout_marginLeft="10dp"
+        android:background="@drawable/rounded_inputs"
+        android:hint="Enter city name..."
+        android:paddingLeft="8dp"
+        android:textColorHint="#B6A5A5"
+        android:textSize="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.888"
+        app:layout_constraintLeft_toLeftOf="@+id/arrival_time_input"
+        app:layout_constraintRight_toRightOf="@+id/arrival_time_input"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.361" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:paddingLeft="10dp"
+        android:paddingBottom="5dp"
+        android:text="Arrival Time"
+        android:textColor="#000000"
+        android:textSize="16dp"
+        app:layout_constraintBottom_toTopOf="@id/arrival_time_input"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="@id/arrival_time_input"
+        app:layout_constraintRight_toRightOf="@+id/arrival_time_input"
+        app:layout_constraintTop_toBottomOf="@id/arrival_city_input"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <EditText
+        android:id="@+id/arrival_time_input"
+        android:layout_width="170dp"
+        android:layout_height="50dp"
+        android:background="@drawable/rounded_inputs"
+        android:hint="Enter time HH:MM.."
+        android:paddingLeft="8dp"
+        android:textColorHint="#B6A5A5"
+        android:textSize="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.888"
+        app:layout_constraintLeft_toLeftOf="@+id/arrival_city_input"
+        app:layout_constraintRight_toRightOf="@+id/arrival_city_input"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.558" />
+
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:paddingBottom="5dp"
+        android:text="Departure Time"
+        android:textColor="#000000"
+        android:textSize="16dp"
+        app:layout_constraintBottom_toTopOf="@id/departure_time_input"
+        app:layout_constraintLeft_toLeftOf="@id/departure_time_input"
+        app:layout_constraintRight_toRightOf="@+id/departure_time_input"
+        app:layout_constraintTop_toBottomOf="@id/departure_city_input"
+        app:layout_constraintVertical_bias="0.75" />
+
+    <EditText
+        android:id="@+id/departure_time_input"
+        android:layout_width="170dp"
+        android:layout_height="50dp"
+        android:background="@drawable/rounded_inputs"
+        android:hint="Enter time HH:MM.."
+        android:paddingLeft="8dp"
+        android:textColorHint="#B6A5A5"
+        android:textSize="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.095"
+        app:layout_constraintLeft_toLeftOf="@+id/departure_city_input"
+        app:layout_constraintRight_toRightOf="@+id/departure_city_input"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.559" />
+
+    <Button
+        android:id="@+id/button"
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:layout_width="240dp"
+        android:layout_height="50dp"
+        android:background="@drawable/rounded_corners"
+        android:backgroundTint="#4E69FF"
+        android:text="search"
+        android:textColor="#FFFF"
+        android:textSize="14dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/train_input_title"
+        app:layout_constraintVertical_bias="0.72" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
