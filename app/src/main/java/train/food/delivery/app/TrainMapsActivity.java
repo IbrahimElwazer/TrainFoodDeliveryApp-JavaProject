@@ -40,7 +40,8 @@ public class TrainMapsActivity extends FragmentActivity implements OnMapReadyCal
     private GoogleMap mMap;
     RequestQueue queue = null;
     ArrayList<TrainStation> station = new ArrayList<TrainStation>();
-
+    ArrayList<String> trainStops = new ArrayList<String>();
+    ArrayList<String> commercialStops = new ArrayList<String>();
     public static void setTimeout(Runnable runnable, int delay){
         new Thread(() -> {
             try {
@@ -60,16 +61,20 @@ public class TrainMapsActivity extends FragmentActivity implements OnMapReadyCal
                 station_url, null, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
-                for (int i = 0; i < 6; i++) {
+                for (int i = 0; i < response.length(); i++) {
                     try {
-                        JSONObject object = response.getJSONObject(i);
-                        String string = object.getString("stationName");
-                        TrainStation stationMarker = new TrainStation();
-                        stationMarker.setStationName(object.getString("stationName"));
-                        stationMarker.setLongitude(Double.parseDouble(object.getString("longitude")));
-                        stationMarker.setLatitude(Double.parseDouble(object.getString("latitude")));
-                        station.add(stationMarker);
-                        Log.i("station", string);
+                        for (int j = 0;j < trainStops.size(); j ++) {
+                            JSONObject object = response.getJSONObject(i);
+                            String string = object.getString("stationShortCode");
+                            if ((string.equals(trainStops.get(j)))&& commercialStops.get(j).equals("true")) {
+                                TrainStation stationMarker = new TrainStation();
+                                stationMarker.setStationName(object.getString("stationName"));
+                                stationMarker.setLongitude(Double.parseDouble(object.getString("longitude")));
+                                stationMarker.setLatitude(Double.parseDouble(object.getString("latitude")));
+                                station.add(stationMarker);
+                                Log.i("station", object.getString("stationName"));
+                            }
+                        }
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
@@ -84,7 +89,7 @@ public class TrainMapsActivity extends FragmentActivity implements OnMapReadyCal
         );
 
         queue.add(stationRequest);
-        Log.i("hello","hello");
+        Log.i("loadStation","hello");
     }
     protected void loadTrain()
     {
@@ -100,6 +105,9 @@ public class TrainMapsActivity extends FragmentActivity implements OnMapReadyCal
                     for (int i = 0; i < timeTableList.length(); i++) {
                         JSONObject timeAtStation = timeTableList.getJSONObject(i);
                         String station = timeAtStation.getString("stationShortCode");
+                        String stop = timeAtStation.getString("trainStopping");
+                        commercialStops.add(stop);
+                        trainStops.add(station);
                         Log.i("arrival station", station);
                     }
                 } catch (JSONException e) {
@@ -114,6 +122,7 @@ public class TrainMapsActivity extends FragmentActivity implements OnMapReadyCal
         }
         );
         queue.add(trainRequest);
+        Log.i("loadTrain","hello");
     }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -121,7 +130,8 @@ public class TrainMapsActivity extends FragmentActivity implements OnMapReadyCal
         queue = Volley.newRequestQueue(this);
         loadTrain();
         loadStation();
-        TrainStation Oulu = new TrainStation();
+        //setTimeout(this::loadStation,1000);
+        /*TrainStation Oulu = new TrainStation();
         Oulu.setStationName("Oulu");
         Oulu.setLatitude(65.012332);
         Oulu.setLongitude(25.484675);
@@ -130,16 +140,24 @@ public class TrainMapsActivity extends FragmentActivity implements OnMapReadyCal
         Tampere.setStationName("Tampere");
         Tampere.setLatitude(61.498657);
         Tampere.setLongitude(23.773124);
-        station.add(Tampere);
+        station.add(Tampere);*/
         setContentView(R.layout.activity_train_maps);
         findViewById(R.id.button).setOnClickListener(this);
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
+
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
-    }
+        //setTimeout(this::printMap,0);
 
+    }
+    /*public void printMap()
+    {
+        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
+                .findFragmentById(R.id.map);
+        mapFragment.getMapAsync(this);
+    }*/
 
     /**
      * Manipulates the map once available.
@@ -153,7 +171,7 @@ public class TrainMapsActivity extends FragmentActivity implements OnMapReadyCal
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-
+        Log.i("mapload","mapload");
         // Add a marker in Sydney and move the camera
         LatLng finland = new LatLng(60.1699, 24.9384);
         mMap.addMarker(new MarkerOptions().position(finland).title("Helsinki asema"));
