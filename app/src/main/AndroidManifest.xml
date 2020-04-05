@@ -33,8 +33,12 @@
         <activity
             android:name=".TrainMapsActivity"
             android:label="@string/title_activity_train_maps">
+
         </activity>
         <activity android:name=".MainActivity">
+
+        </activity>
+        <activity android:name=".RestaurantListActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
