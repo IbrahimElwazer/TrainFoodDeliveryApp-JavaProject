@@ -30,8 +30,8 @@ public class TrainInputActivity extends AppCompatActivity implements View.OnClic
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_train_input);
-        findViewById(R.id.map).setOnClickListener(this);
+        setContentView(R.layout.activity_main);
+        findViewById(R.id.button).setOnClickListener(this);
     }
 
     public static void setTimeout(Runnable runnable, int delay){
@@ -89,7 +89,9 @@ public class TrainInputActivity extends AppCompatActivity implements View.OnClic
     }
     protected void loadTrain()
     {
-        String train_url = "https://rata.digitraffic.fi/api/v1/trains/2020-04-01/24?version=0";
+        String departureCity = findViewById(R.id.departure_city_input).toString();
+        String arrivalCity = findViewById(R.id.arrival_city_input).toString();
+        String train_url = "https://rata.digitraffic.fi/api/v1/live-trains/station/" + departureCity + "/" + arrivalCity;
         JsonArrayRequest trainRequest = new JsonArrayRequest(Request.Method.GET,
                 train_url, null, new Response.Listener<JSONArray>() {
             @Override
@@ -122,7 +124,7 @@ public class TrainInputActivity extends AppCompatActivity implements View.OnClic
     }
     @Override
     public void onClick(View view) {
-        if(view.getId() == R.id.map)
+        if(view.getId() == R.id.button)
         {
             queue = Volley.newRequestQueue(this);
             loadTrain();
