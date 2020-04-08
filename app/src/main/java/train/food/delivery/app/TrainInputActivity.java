@@ -25,12 +25,13 @@ public class TrainInputActivity extends AppCompatActivity implements View.OnClic
 
     RequestQueue queue = null;
     ArrayList<TrainStation> station = new ArrayList<TrainStation>();
+    ArrayList<String> times = new ArrayList<String>();
     ArrayList<String> trainStops = new ArrayList<String>();
     ArrayList<String> commercialStops = new ArrayList<String>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_train_input);
+        setContentView(R.layout.activity_main);
         findViewById(R.id.map).setOnClickListener(this);
     }
 
@@ -63,8 +64,9 @@ public class TrainInputActivity extends AppCompatActivity implements View.OnClic
                                 stationMarker.setStationName(object.getString("stationName"));
                                 stationMarker.setLongitude(Double.parseDouble(object.getString("longitude")));
                                 stationMarker.setLatitude(Double.parseDouble(object.getString("latitude")));
+                                stationMarker.setDate(times.get(j));
                                 station.add(stationMarker);
-                                Log.i("station", object.getString("stationName"));
+                                Log.i("time", times.get(j));
                             }
                         }
                     } catch (JSONException e) {
@@ -89,7 +91,7 @@ public class TrainInputActivity extends AppCompatActivity implements View.OnClic
     }
     protected void loadTrain()
     {
-        String train_url = "https://rata.digitraffic.fi/api/v1/trains/2020-04-01/24?version=0";
+        String train_url = "https://rata.digitraffic.fi/api/v1/trains/2020-04-07/24?version=0";
         JsonArrayRequest trainRequest = new JsonArrayRequest(Request.Method.GET,
                 train_url, null, new Response.Listener<JSONArray>() {
             @Override
@@ -102,6 +104,8 @@ public class TrainInputActivity extends AppCompatActivity implements View.OnClic
                         JSONObject timeAtStation = timeTableList.getJSONObject(i);
                         String station = timeAtStation.getString("stationShortCode");
                         String stop = timeAtStation.getString("trainStopping");
+                        String time = timeAtStation.getString("scheduledTime");
+                        times.add(time);
                         commercialStops.add(stop);
                         trainStops.add(station);
                         Log.i("arrival station", station);
