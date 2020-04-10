@@ -13,6 +13,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.JsonRequest;
 import com.android.volley.toolbox.Volley;
 
 import org.json.JSONArray;
@@ -28,6 +29,8 @@ public class TrainInputActivity extends AppCompatActivity implements View.OnClic
     ArrayList<String> times = new ArrayList<String>();
     ArrayList<String> trainStops = new ArrayList<String>();
     ArrayList<String> commercialStops = new ArrayList<String>();
+    String departureID = new String();
+    String arrivalID = new String();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,10 +49,38 @@ public class TrainInputActivity extends AppCompatActivity implements View.OnClic
             }
         }).start();
     };
+
+    protected  void translate() {
+        String station_url = "https://rata.digitraffic.fi/api/v1/metadata/stations";
+        String departureCity = findViewById(R.id.departure_city_input).toString();
+        String arrivalCity = findViewById(R.id.arrival_city_input).toString();
+        JsonArrayRequest stationRequest = new JsonArrayRequest(Request.Method.GET,
+                station_url, null, new Response.Listener<JSONArray>() {
+            @Override
+            public void onResponse(JSONArray response) {
+                for (int h = 0; h < response.length(); h++) {
+                    try {
+                        JSONObject object = response.getJSONObject(h);
+                        String string = object.getString("stationName");
+                        if (string.equals(departureCity)) {
+                            departureID = object.getString("stationShortCode");
+                        } else {
+                            if (string.equals(arrivalCity)) {
+                                arrivalID = object.getString("stationShortCode");
+                            }
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        })
+
+    }
+
     protected void loadStation() {
         String station_url = "https://rata.digitraffic.fi/api/v1/metadata/stations";
         final TextView netResult = findViewById(R.id.button);
-
         JsonArrayRequest stationRequest = new JsonArrayRequest(Request.Method.GET,
                 station_url, null, new Response.Listener<JSONArray>() {
             @Override
@@ -68,6 +99,7 @@ public class TrainInputActivity extends AppCompatActivity implements View.OnClic
                                 station.add(stationMarker);
                                 Log.i("time", times.get(j));
                             }
+
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -91,7 +123,7 @@ public class TrainInputActivity extends AppCompatActivity implements View.OnClic
     }
     protected void loadTrain()
     {
-        String train_url = "https://rata.digitraffic.fi/api/v1/trains/2020-04-07/24?version=0";
+        String train_url = "https://rata.digitraffic.fi/api/v1/live-trains/station/" + departureID + "/" + arrivalID;
         JsonArrayRequest trainRequest = new JsonArrayRequest(Request.Method.GET,
                 train_url, null, new Response.Listener<JSONArray>() {
             @Override
@@ -129,6 +161,8 @@ public class TrainInputActivity extends AppCompatActivity implements View.OnClic
         if(view.getId() == R.id.map)
         {
             queue = Volley.newRequestQueue(this);
+            translate();
+            setTimeout(this::translate, 1000);
             loadTrain();
             setTimeout(this::loadStation,1000);
             TrainStopModel model = TrainStopApplication.getModel(this);
