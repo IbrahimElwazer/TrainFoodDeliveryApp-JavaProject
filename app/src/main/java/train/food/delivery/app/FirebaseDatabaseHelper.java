@@ -24,7 +24,7 @@ public class FirebaseDatabaseHelper {
     private List<Restaurant> restaurantList = new ArrayList<>();
 
     int numberOfRestaurant = 20;
-   int randomIndex = (int) (Math.random() * numberOfRestaurant);
+    int randomIndex = (int) (Math.random() * numberOfRestaurant);
     public FirebaseDatabaseHelper() {
         database = FirebaseDatabase.getInstance();
         restaurants = database.getReference("restaurants").orderByChild("name").limitToFirst(randomIndex);
