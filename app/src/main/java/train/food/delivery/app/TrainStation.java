@@ -5,12 +5,16 @@ import android.util.Log;
 public class TrainStation {
     private String stationName;
     private double longitude , latitude;
-
+    private String date;
     public String getStationName() {
         return stationName;
     }
     public double getLatitude() {
         return latitude;
+    }
+
+    public String getDate() {
+        return date;
     }
 
     public double getLongitude() {
@@ -28,5 +32,9 @@ public class TrainStation {
     public void setStationName(String stationName) {
         Log.i("station" , stationName);
         this.stationName = stationName;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
     }
 }

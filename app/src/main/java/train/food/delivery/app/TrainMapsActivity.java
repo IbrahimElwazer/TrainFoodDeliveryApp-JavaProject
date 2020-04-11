@@ -20,7 +20,9 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import org.json.JSONArray;
@@ -33,9 +35,18 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
 
-public class TrainMapsActivity extends FragmentActivity implements OnMapReadyCallback , View.OnClickListener {
+public class TrainMapsActivity extends FragmentActivity implements OnMapReadyCallback, View.OnClickListener, GoogleMap.OnInfoWindowClickListener {
 
     private GoogleMap mMap;
     RequestQueue queue = null;
@@ -53,7 +64,7 @@ public class TrainMapsActivity extends FragmentActivity implements OnMapReadyCal
             }
         }).start();
     };
-    protected void loadStation() {
+    /*protected void loadStation() {
         String station_url = "https://rata.digitraffic.fi/api/v1/metadata/stations";
         final TextView netResult = findViewById(R.id.button);
 
@@ -123,13 +134,13 @@ public class TrainMapsActivity extends FragmentActivity implements OnMapReadyCal
         );
         queue.add(trainRequest);
         Log.i("loadTrain","hello");
-    }
+    }*/
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         queue = Volley.newRequestQueue(this);
-        loadTrain();
-        loadStation();
+        //loadTrain();
+        //loadStation();
         //setTimeout(this::loadStation,1000);
         /*TrainStation Oulu = new TrainStation();
         Oulu.setStationName("Oulu");
@@ -142,13 +153,21 @@ public class TrainMapsActivity extends FragmentActivity implements OnMapReadyCal
         Tampere.setLongitude(23.773124);
         station.add(Tampere);*/
         setContentView(R.layout.activity_train_maps);
+        Date date = Calendar.getInstance().getTime();
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        String strDate = dateFormat.format(date);
+        Log.i("test time2", strDate);
         findViewById(R.id.button).setOnClickListener(this);
-
+        TrainStopModel model = TrainStopApplication.getModel(this);
+        for(int i=0;i< model.getStation().size();i++)
+        {
+            station.add(model.getStation().get(i));
+        }
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
 
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
-        mapFragment.getMapAsync(this);
+        mapFragment.getMapAsync(this) ;
         //setTimeout(this::printMap,0);
 
     }
@@ -171,16 +190,46 @@ public class TrainMapsActivity extends FragmentActivity implements OnMapReadyCal
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-        Log.i("mapload","mapload");
+        setTimeout(()->Log.i("hello","loadMap"),1000);
         // Add a marker in Sydney and move the camera
         LatLng finland = new LatLng(60.1699, 24.9384);
-        mMap.addMarker(new MarkerOptions().position(finland).title("Helsinki asema"));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(finland));
         for(int i=0; i<station.size(); i++)
         {
             LatLng newStation = new LatLng(station.get(i).getLatitude(), station.get(i).getLongitude());
-            mMap.addMarker(new MarkerOptions().position(newStation).title(station.get(i).getStationName()));
+
+            SimpleDateFormat inputFormatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+            String s2 = null;
+            Date formattedDate = null;
+            long diff = 0;
+            try {
+                formattedDate = inputFormatter.parse(station.get(i).getDate());
+                Date date = Calendar.getInstance().getTime();
+                diff = (formattedDate.getTime() - date.getTime())/60000;
+                s2 = Long.toString(diff);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+            Log.i("time dif",s2);
+            DateFormat dateFormat = new SimpleDateFormat("hh:mm:ss");
+            String strDate = dateFormat.format(formattedDate);
+            Log.i("time2", strDate);
+            if(diff > 30) {
+                mMap.addMarker(new MarkerOptions().position(newStation).title(station.get(i).getStationName()));
+                mMap.setOnInfoWindowClickListener(this);
+            }
+            else
+            {
+                mMap.addMarker(new MarkerOptions().position(newStation).title(station.get(i).getStationName()).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)));
+                mMap.setOnInfoWindowClickListener(this);
+            }
         }
+        /*googleMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
+            @Override
+            public void onInfoWindowClick(Marker marker) {
+
+            }
+        });*/
     }
 
 
@@ -188,7 +237,12 @@ public class TrainMapsActivity extends FragmentActivity implements OnMapReadyCal
     public void onClick(View v) {
         if (v.getId() == R.id.button)
         {
-           loadTrain();
+            //loadTrain();
         }
+    }
+
+    @Override
+    public void onInfoWindowClick(Marker marker) {
+        Log.i("marker click",marker.getTitle());
     }
 }
