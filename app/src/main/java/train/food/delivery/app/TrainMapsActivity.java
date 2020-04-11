@@ -193,7 +193,6 @@ public class TrainMapsActivity extends FragmentActivity implements OnMapReadyCal
         setTimeout(()->Log.i("hello","loadMap"),1000);
         // Add a marker in Sydney and move the camera
         LatLng finland = new LatLng(60.1699, 24.9384);
-        mMap.addMarker(new MarkerOptions().position(finland).title("Helsinki asema"));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(finland));
         for(int i=0; i<station.size(); i++)
         {
