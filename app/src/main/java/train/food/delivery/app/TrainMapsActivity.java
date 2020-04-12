@@ -244,8 +244,15 @@ public class TrainMapsActivity extends FragmentActivity implements OnMapReadyCal
 
     @Override
     public void onInfoWindowClick(Marker marker) {
-        Log.i("marker click",marker.getTitle());
-        Intent intent = new Intent(this, RestaurantListActivity.class);
-        startActivity(intent);
+        if(marker.getSnippet() == null)
+        {
+            Log.i("hello", "marker");
+        }
+        else {
+            Log.i("marker click", marker.getSnippet());
+            Intent intent = new Intent(this, RestaurantListActivity.class);
+            intent.putExtra("station",marker.getTitle());
+            startActivity(intent);
+        }
     }
 }
