@@ -215,7 +215,7 @@ public class TrainMapsActivity extends FragmentActivity implements OnMapReadyCal
             String strDate = dateFormat.format(formattedDate);
             Log.i("time2", strDate);
             if(diff > 30) {
-                mMap.addMarker(new MarkerOptions().position(newStation).title(station.get(i).getStationName()));
+                mMap.addMarker(new MarkerOptions().position(newStation).title(station.get(i).getStationName()).snippet(strDate));
                 mMap.setOnInfoWindowClickListener(this);
             }
             else
