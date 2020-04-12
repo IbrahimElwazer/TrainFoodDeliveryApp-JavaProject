@@ -36,14 +36,16 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
 
-        <activity
-            android:name=".TrainMapsActivity"
-            android:label="@string/title_activity_train_maps"></activity>
-        <activity android:name=".MainActivity"></activity>
+        <activity android:name=".TrainMapsActivity" android:label="@string/title_activity_train_maps">
+
+        </activity>
+         <activity android:name=".MainActivity">
+
+        </activity>
         <activity android:name=".RestaurantListActivity">
 
 
         </activity>
-    </application>
+</application>
 
-</manifest>
+    </manifest>
