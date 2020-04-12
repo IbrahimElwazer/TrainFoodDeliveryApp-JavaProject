@@ -19,7 +19,7 @@ public class RestaurantListActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.restaurant_list);
-        mRecycleView = findViewById(R.id.recycle_restaurantList);
+        mRecycleView = (RecyclerView)findViewById(R.id.recycle_restaurantList);
         new FirebaseDatabaseHelper().readRestaurant(new FirebaseDatabaseHelper.DataStatus() {
             @Override
             public void DataIsLoaded(List<Restaurant> restaurantList, List<String> keys) {
