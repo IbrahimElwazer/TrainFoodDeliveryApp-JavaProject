@@ -2,6 +2,7 @@ package train.food.delivery.app;
 
 import androidx.fragment.app.FragmentActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -244,5 +245,7 @@ public class TrainMapsActivity extends FragmentActivity implements OnMapReadyCal
     @Override
     public void onInfoWindowClick(Marker marker) {
         Log.i("marker click",marker.getTitle());
+        Intent intent = new Intent(this, RestaurantListActivity.class);
+        startActivity(intent);
     }
 }
