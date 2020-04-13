@@ -178,15 +178,15 @@ public class TrainInputActivity extends AppCompatActivity implements View.OnClic
         {
             //queue = Volley.newRequestQueue(this);
             translate();
-            setTimeout(this::loadTrain, 2000);
+            setTimeout(this::loadTrain, 20000);
             //setTimeout(this::translate, 1000);
-            setTimeout(this::loadStation,3000);
+            setTimeout(this::loadStation,30000);
             TrainStopModel model = TrainStopApplication.getModel(this);
-            setTimeout(()->model.addNewTodoItem(station),4000);
+            setTimeout(()->model.addNewTodoItem(station),40000);
             //setTimeout(()-> ,5000);;
             //testLog();
             Intent intent = new Intent(this, TrainMapsActivity.class);
-            setTimeout(()->startActivity(intent),5000);
+            setTimeout(()->startActivity(intent),50000);
         }
     }
     }
