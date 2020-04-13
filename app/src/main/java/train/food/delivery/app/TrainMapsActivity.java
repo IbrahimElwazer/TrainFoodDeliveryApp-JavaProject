@@ -296,7 +296,6 @@ public class TrainMapsActivity extends FragmentActivity implements OnMapReadyCal
     public void onLocationChanged(Location location) {
         latitude = location.getLatitude();
         longitude = location.getLongitude();
-        Log.i("latitude",Double.toString(latitude));
     }
 
     @Override
