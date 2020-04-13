@@ -1,8 +1,17 @@
 package train.food.delivery.app;
 
+import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.FragmentActivity;
 
+import android.Manifest;
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -47,24 +56,29 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
-public class TrainMapsActivity extends FragmentActivity implements OnMapReadyCallback, View.OnClickListener, GoogleMap.OnInfoWindowClickListener {
+public class TrainMapsActivity extends FragmentActivity implements OnMapReadyCallback, View.OnClickListener, GoogleMap.OnInfoWindowClickListener, LocationListener {
 
     private GoogleMap mMap;
     RequestQueue queue = null;
     ArrayList<TrainStation> station = new ArrayList<TrainStation>();
     ArrayList<String> trainStops = new ArrayList<String>();
     ArrayList<String> commercialStops = new ArrayList<String>();
-    public static void setTimeout(Runnable runnable, int delay){
+    protected LocationManager locationManager;
+    protected double latitude, longitude;
+
+    public static void setTimeout(Runnable runnable, int delay) {
         new Thread(() -> {
             try {
                 Thread.sleep(delay);
                 runnable.run();
-            }
-            catch (Exception e){
+            } catch (Exception e) {
                 System.err.println(e);
             }
         }).start();
-    };
+    }
+
+    ;
+
     /*protected void loadStation() {
         String station_url = "https://rata.digitraffic.fi/api/v1/metadata/stations";
         final TextView netResult = findViewById(R.id.button);
@@ -139,7 +153,18 @@ public class TrainMapsActivity extends FragmentActivity implements OnMapReadyCal
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        queue = Volley.newRequestQueue(this);
+        locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            return;
+        }
+        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
         //loadTrain();
         //loadStation();
         //setTimeout(this::loadStation,1000);
@@ -194,6 +219,8 @@ public class TrainMapsActivity extends FragmentActivity implements OnMapReadyCal
         setTimeout(()->Log.i("hello","loadMap"),1000);
         // Add a marker in Sydney and move the camera
         LatLng finland = new LatLng(60.1699, 24.9384);
+        LatLng currentLocation = new LatLng(latitude,longitude);
+        mMap.addMarker(new MarkerOptions().position(currentLocation).title("current location"));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(finland));
         for(int i=0; i<station.size(); i++)
         {
@@ -221,7 +248,7 @@ public class TrainMapsActivity extends FragmentActivity implements OnMapReadyCal
             }
             else
             {
-                mMap.addMarker(new MarkerOptions().position(newStation).title(station.get(i).getStationName()).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)));
+                mMap.addMarker(new MarkerOptions().position(newStation).title(station.get(i).getStationName()).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE)));
                 mMap.setOnInfoWindowClickListener(this);
             }
         }
@@ -246,7 +273,16 @@ public class TrainMapsActivity extends FragmentActivity implements OnMapReadyCal
     public void onInfoWindowClick(Marker marker) {
         if(marker.getSnippet() == null)
         {
-            Log.i("hello", "marker");
+            AlertDialog alertDialog = new AlertDialog.Builder(TrainMapsActivity.this).create();
+            alertDialog.setTitle("You cannot order from this station");
+            alertDialog.setMessage("The time of ordering food must be 30 minutes before station arrival");
+            alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    });
+            alertDialog.show();
         }
         else {
             Log.i("marker click", marker.getSnippet());
@@ -254,5 +290,27 @@ public class TrainMapsActivity extends FragmentActivity implements OnMapReadyCal
             intent.putExtra("station",marker.getTitle());
             startActivity(intent);
         }
+    }
+
+    @Override
+    public void onLocationChanged(Location location) {
+        latitude = location.getLatitude();
+        longitude = location.getLongitude();
+        Log.i("latitude",Double.toString(latitude));
+    }
+
+    @Override
+    public void onStatusChanged(String provider, int status, Bundle extras) {
+        Log.d("Latitude","status");
+    }
+
+    @Override
+    public void onProviderEnabled(String provider) {
+        Log.d("Latitude","enable");
+    }
+
+    @Override
+    public void onProviderDisabled(String provider) {
+        Log.d("Latitude","enable");
     }
 }

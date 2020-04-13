@@ -16,6 +16,12 @@ public class TrainStopModel {
         }
     }
 
+    void removeList(){
+        for( int i = 0; i<stations.size(); i++)
+        {
+            stations.remove(stations.get(i));
+        }
+    }
     public List<TrainStation> getStation() {
         return stations;
     }

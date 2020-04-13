@@ -38,6 +38,8 @@ public class TrainInputActivity extends AppCompatActivity implements View.OnClic
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         findViewById(R.id.map).setOnClickListener(this);
+        TrainStopModel model = TrainStopApplication.getModel(this);
+        //model.removeList();
         queue = Volley.newRequestQueue(this);
     }
 
