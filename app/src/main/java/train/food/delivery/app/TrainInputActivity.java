@@ -38,6 +38,8 @@ public class TrainInputActivity extends AppCompatActivity implements View.OnClic
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         findViewById(R.id.map).setOnClickListener(this);
+        TrainStopModel model = TrainStopApplication.getModel(this);
+        //model.removeList();
         queue = Volley.newRequestQueue(this);
     }
 
@@ -164,7 +166,7 @@ public class TrainInputActivity extends AppCompatActivity implements View.OnClic
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Log.i("error", "error");
+                Log.i("error", error.getLocalizedMessage());
             }
         }
         );
@@ -178,15 +180,15 @@ public class TrainInputActivity extends AppCompatActivity implements View.OnClic
         {
             //queue = Volley.newRequestQueue(this);
             translate();
-            setTimeout(this::loadTrain, 2000);
+            setTimeout(this::loadTrain, 3000);
             //setTimeout(this::translate, 1000);
-            setTimeout(this::loadStation,3000);
+            setTimeout(this::loadStation,4000);
             TrainStopModel model = TrainStopApplication.getModel(this);
-            setTimeout(()->model.addNewTodoItem(station),4000);
+            setTimeout(()->model.addNewTodoItem(station),5000);
             //setTimeout(()-> ,5000);;
             //testLog();
             Intent intent = new Intent(this, TrainMapsActivity.class);
-            setTimeout(()->startActivity(intent),5000);
+            setTimeout(()->startActivity(intent),6000);
         }
     }
     }

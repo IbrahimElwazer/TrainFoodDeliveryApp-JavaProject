@@ -12,7 +12,7 @@ public class TrainStopApplication extends Application {
         model = new TrainStopModel();
     }
 
-    static public TrainStopModel getModel(Activity activity) {
+    public static TrainStopModel getModel(Activity activity) {
         TrainStopApplication app = (TrainStopApplication)activity.getApplication();
         return app.model;
     }
