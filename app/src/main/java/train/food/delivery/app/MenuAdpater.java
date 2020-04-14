@@ -11,16 +11,15 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MenuViewHolder> {
+public class MenuAdpater extends RecyclerView.Adapter<MenuAdpater.MenuViewHolder> {
 
     Context mContext;
-    ArrayList<Menu> menuList;
+    ArrayList<Menu> menu;
 
-    public MenuAdapter(Context mContext, ArrayList<Menu> menuList) {
+    public MenuAdpater(Context mContext, ArrayList<Menu> menu) {
         this.mContext = mContext;
-        this.menuList = menuList;
+        this.menu = menu;
     }
-
 
     @NonNull
     @Override
@@ -30,29 +29,26 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MenuViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull MenuViewHolder holder, int position) {
-
-        holder.item.setText(menuList.get(position).getItem());
-        holder.price.setText(menuList.get(position).getPrice());
+        holder.menu_item_name.setText(menu.get(position).getItem());
+        holder.menu_item_price.setText(menu.get(position).getPrice());
 
     }
 
     @Override
     public int getItemCount() {
-        return menuList.size();
+        return menu.size();
     }
 
+    public class MenuViewHolder extends RecyclerView.ViewHolder{
 
-     class MenuViewHolder extends RecyclerView.ViewHolder{
+        TextView menu_item_name, menu_item_price;
 
-        TextView item, price;
+        public MenuViewHolder(View itemView) {
+            super(itemView);
 
-         public MenuViewHolder(@NonNull View itemView) {
-             super(itemView);
+            menu_item_name = itemView.findViewById(R.id.menu_item_name);
+            menu_item_price = itemView.findViewById(R.id.menu_item_price);
 
-             item = itemView.findViewById(R.id.menu_item_name);
-             price = itemView.findViewById(R.id.menu_item_price);
-
-         }
-     }
-
+        }
+    }
 }

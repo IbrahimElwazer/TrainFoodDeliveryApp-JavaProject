@@ -2,8 +2,8 @@ package train.food.delivery.app;
 
 public class Menu {
 
-    private String item;
-    private String price;
+    String item;
+    String price;
 
     public Menu() {
     }

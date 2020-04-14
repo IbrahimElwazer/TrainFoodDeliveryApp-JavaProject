@@ -27,7 +27,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:scrollbars="vertical"
-        tools:ignore="MissingConstraints"
-        app:layout_constraintTop_toBottomOf="@+id/restaurant_name"/>
+        app:layout_constraintTop_toBottomOf="@+id/restaurant_title"
+        tools:ignore="MissingConstraints" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
