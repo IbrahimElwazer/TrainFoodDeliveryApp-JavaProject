@@ -11,12 +11,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-public class MenuAdpater extends RecyclerView.Adapter<MenuAdpater.MenuViewHolder> {
+public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MenuViewHolder> {
 
     Context mContext;
     ArrayList<Menu> menu;
 
-    public MenuAdpater(Context mContext, ArrayList<Menu> menu) {
+    public MenuAdapter(Context mContext, ArrayList<Menu> menu) {
         this.mContext = mContext;
         this.menu = menu;
     }

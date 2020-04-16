@@ -1,7 +1,6 @@
 package train.food.delivery.app;
 
 import android.os.Bundle;
-import android.widget.Toast;
 
 
 import androidx.annotation.NonNull;
@@ -24,7 +23,7 @@ public class RestaurantMenuActivity extends AppCompatActivity {
     DatabaseReference database;
     RecyclerView recyclerView;
     ArrayList<Menu> menuList;
-    MenuAdpater adapter;
+    MenuAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,16 +35,23 @@ public class RestaurantMenuActivity extends AppCompatActivity {
 
         menuList = new ArrayList<Menu>();
 
-        database = FirebaseDatabase.getInstance().getReference("restaurants").child("menu");
+
+        database = FirebaseDatabase.getInstance().getReference("menus");
         database.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                   for(DataSnapshot ds : dataSnapshot.getChildren()){
-                       Menu menu = ds.getValue(Menu.class);
-                       menuList.add(menu);
-                   }
 
-                   adapter = new MenuAdpater(RestaurantMenuActivity.this, menuList);
+//                    menuList.clear();
+                   for(DataSnapshot ds : dataSnapshot.getChildren()) {
+                       for(DataSnapshot datasnapshot : ds.getChildren()){
+                            String item = datasnapshot.getValue(Menu.class).getItem();
+                            String price = datasnapshot.getValue(Menu.class).getPrice();
+
+                            Menu results = new Menu(item, price);
+                               menuList.add(results);
+                        }
+                   }
+                   adapter = new MenuAdapter(RestaurantMenuActivity.this, menuList);
                    recyclerView.setAdapter(adapter);
             }
 
