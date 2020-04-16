@@ -30,6 +30,8 @@ public class TrainInputActivity extends AppCompatActivity implements View.OnClic
     ArrayList<TrainStation> station = new ArrayList<TrainStation>();
     ArrayList<String> times = new ArrayList<String>();
     ArrayList<String> trainStops = new ArrayList<String>();
+
+
     ArrayList<String> commercialStops = new ArrayList<String>();
     String departureID;
     String arrivalID;
@@ -189,6 +191,7 @@ public class TrainInputActivity extends AppCompatActivity implements View.OnClic
             //testLog();
             Intent intent = new Intent(this, TrainMapsActivity.class);
             setTimeout(()->startActivity(intent),6000);
+
         }
     }
     }

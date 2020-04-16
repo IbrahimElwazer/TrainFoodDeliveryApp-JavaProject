@@ -13,12 +13,14 @@
 
 
     <TextView
+        android:text="name"
         android:id="@+id/restaurant_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="8dp"
         android:textColor="@android:color/black"
-        android:textSize="16dp"
+        android:textSize="20dp"
+        android:layout_marginLeft="15dp"
         android:layout_marginTop="10dp"
         app:layout_constraintTop_toTopOf="parent">
 
