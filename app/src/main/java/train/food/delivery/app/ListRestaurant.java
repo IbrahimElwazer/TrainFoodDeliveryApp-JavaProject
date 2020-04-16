@@ -32,6 +32,8 @@ public class ListRestaurant {
             super(LayoutInflater.from(mContext).inflate(R.layout.show_restaurant, parent, false));
 
             RestaurantName = (TextView) itemView.findViewById(R.id.restaurant_name);
+
+
         }
 
         public void bind(Restaurant restaurants , String keys ) {

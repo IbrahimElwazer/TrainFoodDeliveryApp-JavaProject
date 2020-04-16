@@ -41,7 +41,7 @@ public class RestaurantMenuActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-//                    menuList.clear();
+                    menuList.clear();
                    for(DataSnapshot ds : dataSnapshot.getChildren()) {
                        for(DataSnapshot datasnapshot : ds.getChildren()){
                             String item = datasnapshot.getValue(Menu.class).getItem();
