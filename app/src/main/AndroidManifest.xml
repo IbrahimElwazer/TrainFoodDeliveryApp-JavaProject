@@ -21,11 +21,7 @@
             android:name=".RestaurantMenuActivity"
             android:label="@string/title_activity_restaurant_menu"
             android:theme="@style/NoActionBar">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".TrainInputActivity">
 
@@ -50,6 +46,15 @@
         <activity android:name=".RestaurantListActivity">
 
         </activity>
+        <activity
+            android:name=".OrderListActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
     </application>
 
 </manifest>

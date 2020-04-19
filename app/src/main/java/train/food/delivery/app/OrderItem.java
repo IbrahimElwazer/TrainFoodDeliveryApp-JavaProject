@@ -4,10 +4,10 @@ import android.util.Log;
 
 public class OrderItem {
     private String name;
-    private float price;
+    private double price;
     private int quantity;
 
-    public float getPrice() {
+    public double getPrice() {
         return price;
     }
 
@@ -23,12 +23,12 @@ public class OrderItem {
         this.name = name;
     }
 
-    public void setPrice(float price) {
+    public void setPrice(double price) {
         this.price = price;
     }
 
     public void setQuantity(int quantity) {
-        if (quantity < 1) {
+        if (quantity >= 1) {
             this.quantity = quantity;
         }
         else
@@ -37,9 +37,9 @@ public class OrderItem {
         }
 
     }
-    public float getTotal()
+    public double getTotal()
     {
-        float price = this.price * this.quantity;
+        double price = this.price * this.quantity;
         return price;
     }
 

@@ -1,5 +1,7 @@
 package train.food.delivery.app;
 
+import android.util.Log;
+
 import java.util.ArrayList;
 
 public class OrderList {
@@ -13,6 +15,7 @@ public class OrderList {
         if(item != null)
         {
             orderList.add(item);
+            Log.i("add", item.getName());
         }
     }
     public void removeItem(OrderItem item)
@@ -30,9 +33,9 @@ public class OrderList {
             }
         }
     }
-    public float moneyCalcuation()
+    public double moneyCalcuation()
     {
-        float total = 0;
+        double total = 0;
         for(int i=0; i<orderList.size();i++)
         {
             total =  total + orderList.get(i).getTotal();
