@@ -24,11 +24,7 @@
 
         </activity>
         <activity android:name=".TrainInputActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
 
         </activity>
         <!--
@@ -48,7 +44,11 @@
             android:label="@string/title_activity_train_maps" />
         <activity android:name=".MainActivity" />
         <activity android:name=".RestaurantListActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
     </application>
 

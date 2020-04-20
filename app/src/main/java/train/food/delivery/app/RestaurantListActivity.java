@@ -1,13 +1,18 @@
 package train.food.delivery.app;
 
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.AdapterView.OnItemLongClickListener;
 
+import java.lang.reflect.Method;
 import java.util.List;
 
 
@@ -24,8 +29,10 @@ public class RestaurantListActivity extends AppCompatActivity {
             @Override
             public void DataIsLoaded(List<Restaurant> restaurantList, List<String> keys) {
                 new ListRestaurant().setConfig(mRecycleView, RestaurantListActivity.this, restaurantList,keys);
+
             }
         });
-    }
 
+
+    }
 }
