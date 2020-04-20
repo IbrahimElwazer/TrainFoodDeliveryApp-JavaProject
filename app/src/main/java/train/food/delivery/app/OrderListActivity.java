@@ -16,6 +16,8 @@ import java.util.ArrayList;
 
 public class OrderListActivity extends AppCompatActivity {
 
+    public OrderList orderList = new OrderList();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,7 +27,7 @@ public class OrderListActivity extends AppCompatActivity {
     }
     private void ButtonCLick()
     {
-        OrderList orderList = new OrderList();
+        double totalMoney = 0;
         OrderItem item = new OrderItem();
         OrderItem item2 = new OrderItem();
         item.setName("Mc Donald");
@@ -41,9 +43,26 @@ public class OrderListActivity extends AppCompatActivity {
         {
             Log.i("item",hello.get(i).getName());
         }
-        OrderAdapter adapter = new OrderAdapter(this, hello);
+        totalMoney = totalMoney + orderList.moneyCalcuation();
+        OrderAdapter adapter = new OrderAdapter(this, orderList);
         ListView listView = (ListView) findViewById(R.id.orderList);
         listView.setAdapter(adapter);
-
+        TextView total = (TextView) findViewById(R.id.totalMoney);
+        total.setText("Total: " + Double.toString(totalMoney));
+    }
+    public void updateUI(View view)
+    {
+        double totalMoney = 0;
+        ArrayList<OrderItem> hello = (ArrayList) orderList.getOrderList();
+        for(int i=0;i<hello.size();i++)
+        {
+            Log.i("item",hello.get(i).getName());
+        }
+        totalMoney = totalMoney + orderList.moneyCalcuation();
+        OrderAdapter adapter = new OrderAdapter(this, orderList);
+        ListView listView = (ListView) findViewById(R.id.orderList);
+        listView.setAdapter(adapter);
+        TextView total = (TextView) findViewById(R.id.totalMoney);
+        total.setText("Total: " + Double.toString(totalMoney));
     }
 }

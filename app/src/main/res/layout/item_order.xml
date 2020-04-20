@@ -1,22 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="50dp">
+    <TableRow
+        android:id="@+id/simpleTableLayout"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:layout_width="0dip"
+            android:layout_height="fill_parent"
+            android:layout_weight="0.15">
+
+            <TextView
+                android:id="@+id/name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Name">
+            </TextView>
+        </RelativeLayout>
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/name"
-        android:text="Name">
-    </TextView>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:id="@+id/price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:text="Price">
     </TextView>
+    <Button
+        android:layout_width="35dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/addQuantity"
+        android:text="+">
+    </Button>
     <TextView
+        android:id="@+id/quantity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/quantity">
+        android:text="Quantity">
+
     </TextView>
-</LinearLayout>
+    <Button
+        android:layout_width="35dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/substrastQuantity"
+        android:text="-">
+    </Button>
+    <Button
+        android:layout_width="35dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/removeItem"
+        android:text="x">
+    </Button>
+    </TableRow>
+</RelativeLayout>
