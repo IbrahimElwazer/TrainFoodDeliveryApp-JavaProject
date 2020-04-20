@@ -27,12 +27,13 @@ public class FirebaseDatabaseHelper {
     int randomIndex = (int) (Math.random() * numberOfRestaurant);
     public FirebaseDatabaseHelper() {
         database = FirebaseDatabase.getInstance();
-        restaurants = database.getReference("restaurants").orderByChild("name").limitToFirst(randomIndex);
+        restaurants = database.getReference("restaurants").limitToFirst(randomIndex);
     }
 
     public interface DataStatus {
         void DataIsLoaded (List<Restaurant> restaurantList , List<String> keys);
     }
+
     public void readRestaurant(final DataStatus dataStatus) {
         restaurants.addValueEventListener(new ValueEventListener() {
             @Override
@@ -41,7 +42,10 @@ public class FirebaseDatabaseHelper {
                 List<String> keys = new ArrayList<>();
                 for(DataSnapshot keyNode : dataSnapshot.getChildren()) {
                     keys.add(keyNode.getKey());
-                    Restaurant restaurant = keyNode.getValue(Restaurant.class);
+                    String name = keyNode.getValue(Restaurant.class).getName();
+                    int menuID = keyNode.getValue(Restaurant.class).getMenuID();
+
+                    Restaurant restaurant = new Restaurant(name, menuID);
                     restaurantList.add(restaurant);
 
                 }
