@@ -44,6 +44,7 @@ public class RestaurantMenuActivity extends AppCompatActivity {
     private void loadRestaurantMenu(String menuID) {
 
         recyclerView = findViewById(R.id.recycler_view_menu);
+        recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         menuList = new ArrayList<Menu>();
@@ -57,8 +58,8 @@ public class RestaurantMenuActivity extends AppCompatActivity {
                     for(DataSnapshot datasnapshot : dataSnapshot.getChildren()){
                         String item = datasnapshot.getValue(Menu.class).getItem();
                         String price = datasnapshot.getValue(Menu.class).getPrice();
-
-                        Menu results = new Menu(item, price);
+                        String image = datasnapshot.getValue(Menu.class).getImage();
+                        Menu results = new Menu(item, price, image);
                         menuList.add(results);
                     }
 

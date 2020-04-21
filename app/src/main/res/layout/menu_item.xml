@@ -13,7 +13,12 @@
         tools:ignore="MissingConstraints"
         android:orientation="horizontal">
 
-
+        <ImageView
+            android:id="@+id/menu_item_image"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_marginTop="40dp"
+            android:src="@mipmap/ic_launcher_round" />
         <TextView
             android:text="name"
             android:id="@+id/menu_item_name"
@@ -47,7 +52,14 @@
             app:layout_constraintTop_toTopOf="parent">
 
         </TextView>
-
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/ic_add_black_24dp"
+            app:fabSize="mini"
+            app:fabCustomSize="20dp"
+            android:layout_toRightOf="@id/menu_item_name"
+            android:layout_marginTop="20dp"/>
         <View
             android:layout_width="match_parent"
             android:layout_height="0.5dp"
