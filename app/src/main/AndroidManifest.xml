@@ -54,7 +54,8 @@
             android:name=".OrderListActivity">
 
         </activity>
-
+        <activity android:name=".OrderPaymentActivity"/>
+        <activity android:name=".thankYou"></activity>
     </application>
 
 </manifest>

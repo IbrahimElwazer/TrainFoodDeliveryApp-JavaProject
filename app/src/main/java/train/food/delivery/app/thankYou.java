@@ -3,26 +3,26 @@ package train.food.delivery.app;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
-public class OrderPaymentActivity extends AppCompatActivity {
+public class thankYou extends AppCompatActivity {
 
-    Button btnConfirm;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.order_payment);
-        btnConfirm = (Button) findViewById(R.id.pay);
-
-        btnConfirm.setOnClickListener(new View.OnClickListener() {
+        setContentView(R.layout.thank_you);
+        TextView number = findViewById(R.id.orderNumber);
+        number.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(OrderPaymentActivity.this, thankYou.class));
+                Toast.makeText(thankYou.this,"XD",Toast.LENGTH_SHORT).show();
             }
         });
+        number.setText((int) (Math.floor(Math.random() * 1000000)));
     }
+
 }
