@@ -50,6 +50,11 @@
         <activity android:name=".RestaurantListActivity">
 
         </activity>
+        <activity
+            android:name=".OrderListActivity">
+
+        </activity>
+
     </application>
 
 </manifest>

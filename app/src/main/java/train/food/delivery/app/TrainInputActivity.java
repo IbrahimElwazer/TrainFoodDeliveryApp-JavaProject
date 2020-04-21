@@ -147,6 +147,7 @@ public class TrainInputActivity extends AppCompatActivity implements View.OnClic
         String train_url = "https://rata.digitraffic.fi/api/v1/live-trains/station/" + departureID + "/" + arrivalID;
         EditText trainNum = findViewById(id.trainNumber);
         String trainCode = trainNum.getText().toString();
+        Log.i("train code", trainCode);
         JsonArrayRequest trainRequest = new JsonArrayRequest(Request.Method.GET,
                 train_url, null, new Response.Listener<JSONArray>() {
             @Override
@@ -157,7 +158,7 @@ public class TrainInputActivity extends AppCompatActivity implements View.OnClic
 
                     for ( int l = 0; l < response.length(); l++) {
                         String trainsNumber = response.getJSONObject(l).getString("trainNumber");
-                        if (trainsNumber == trainCode) {
+                        if (trainsNumber.equals(trainCode)) {
                             JSONObject train = response.getJSONObject(l);
                             JSONArray timeTableList = train.getJSONArray("timeTableRows");
                             for (int i = 0; i < timeTableList.length(); i++) {
