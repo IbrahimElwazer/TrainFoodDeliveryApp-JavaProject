@@ -54,10 +54,6 @@
         android:textSize="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-<<<<<<< HEAD
-=======
-        app:layout_constraintHorizontal_bias="0.473"
->>>>>>> a6dd6e417e910c2e08fe64d9c9dd07109f070393
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.314" />
@@ -76,7 +72,6 @@
         app:layout_constraintBottom_toTopOf="@id/arrival_city_input"
         app:layout_constraintLeft_toLeftOf="@id/arrival_city_input"
         app:layout_constraintTop_toTopOf="parent"
-
         app:layout_constraintVertical_bias="1.0" />
 
     <EditText
@@ -92,37 +87,21 @@
         android:textSize="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-<<<<<<< HEAD
-        app:layout_constraintLeft_toLeftOf="@+id/arrival_city_title"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-       />
-=======
         app:layout_constraintHorizontal_bias="0.438"
         app:layout_constraintLeft_toLeftOf="@+id/arrival_city_title"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.499" />
->>>>>>> a6dd6e417e910c2e08fe64d9c9dd07109f070393
+
 
     <TextView
         android:id="@+id/train_number"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
-<<<<<<< HEAD
-        android:paddingLeft="10dp"
-=======
->>>>>>> a6dd6e417e910c2e08fe64d9c9dd07109f070393
         android:paddingBottom="5dp"
         android:text="Train Number"
         android:textColor="#000000"
         android:textSize="16dp"
-<<<<<<< HEAD
-        app:layout_constraintBottom_toTopOf="@+id/trainNumber"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintLeft_toLeftOf="@+id/trainNumber"
-        app:layout_constraintRight_toRightOf="@+id/trainNumber" />
-=======
         android:paddingLeft="10dp"
         app:layout_constraintBottom_toTopOf="@+id/trainNumber"
         app:layout_constraintHorizontal_bias="0.0"
@@ -130,7 +109,7 @@
         app:layout_constraintRight_toRightOf="@+id/trainNumber"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0" />
->>>>>>> a6dd6e417e910c2e08fe64d9c9dd07109f070393
+
 
     <EditText
         android:id="@+id/trainNumber"
@@ -144,10 +123,6 @@
         android:textSize="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-<<<<<<< HEAD
-=======
-        app:layout_constraintHorizontal_bias="0.497"
->>>>>>> a6dd6e417e910c2e08fe64d9c9dd07109f070393
         app:layout_constraintLeft_toLeftOf="@+id/departure_city_input"
         app:layout_constraintRight_toRightOf="@+id/departure_city_input"
         app:layout_constraintStart_toStartOf="parent"
