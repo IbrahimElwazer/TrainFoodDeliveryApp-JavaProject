@@ -39,7 +39,6 @@ public class RestaurantMenuActivity extends AppCompatActivity {
         if(!menuID.isEmpty() && menuID != null){
             loadRestaurantMenu(menuID);
         }
-
     }
 
     private void loadRestaurantMenu(String menuID) {
@@ -55,7 +54,7 @@ public class RestaurantMenuActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
 
-        database = FirebaseDatabase.getInstance().getReference("menus").child(menuID);
+                database = FirebaseDatabase.getInstance().getReference("menus").child(menuID);
         database.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
