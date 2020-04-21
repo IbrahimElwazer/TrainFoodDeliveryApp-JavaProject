@@ -1,26 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical">
-
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".RestaurantMenuActivity"
+    android:background="@color/colorWhite">
+    <TextView
+        android:id="@+id/order_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="15dp"
+        android:paddingBottom="20dp"
+        android:textStyle="bold"
+        android:text="Order List"
+        android:orientation="horizontal"
+        android:gravity="center_horizontal"
+        android:textColor="@android:color/black"
+        android:textSize="28sp"
+        tools:ignore="MissingConstraints" />
     <ListView
         android:id="@+id/orderList"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/order_title"
+        tools:ignore="MissingConstraints" >
     </ListView>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/totalMoney">
+        android:textColor="@android:color/black"
+        android:id="@+id/totalMoney"
+        app:layout_constraintTop_toBottomOf="@+id/orderList"
+        tools:ignore="MissingConstraints" >
     </TextView>
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/updateUI"
-        android:text="Update"
-        android:onClick="updateUI"></Button>
-</LinearLayout>
+        android:id="@+id/payment"
+        android:text="Proceed payment"
+        app:layout_constraintTop_toBottomOf="@+id/totalMoney"
+        tools:ignore="MissingConstraints">
+    </Button>
+</androidx.constraintlayout.widget.ConstraintLayout>

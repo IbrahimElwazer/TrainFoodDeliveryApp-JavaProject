@@ -1,6 +1,7 @@
 package train.food.delivery.app;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,6 +32,19 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MenuViewHolder
     public void onBindViewHolder(@NonNull MenuViewHolder holder, int position) {
         holder.menu_item_name.setText(menu.get(position).getItem());
         holder.menu_item_price.setText(menu.get(position).getPrice());
+        holder.menu_item_name.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                OrderList orderList = new OrderList();
+                OrderItem item = new OrderItem();
+                item.setName(menu.get(position).getItem());
+                item.setPrice(Double.parseDouble(menu.get(position).getPrice()));
+                item.setQuantity(1);
+                orderList.addItem(item);
+                Intent intent = new Intent(mContext, OrderListActivity.class);
+                mContext.startActivity(intent);
+            }
+        });
 
     }
 
@@ -48,7 +62,6 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MenuViewHolder
 
             menu_item_name = itemView.findViewById(R.id.menu_item_name);
             menu_item_price = itemView.findViewById(R.id.menu_item_price);
-
         }
     }
 }

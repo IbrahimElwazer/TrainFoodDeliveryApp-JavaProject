@@ -39,7 +39,6 @@ public class RestaurantMenuActivity extends AppCompatActivity {
         if(!menuID.isEmpty() && menuID != null){
             loadRestaurantMenu(menuID);
         }
-
     }
 
     private void loadRestaurantMenu(String menuID) {

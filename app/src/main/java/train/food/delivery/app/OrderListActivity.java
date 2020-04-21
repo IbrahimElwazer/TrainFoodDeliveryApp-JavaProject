@@ -15,29 +15,23 @@ import androidx.appcompat.app.AppCompatActivity;
 import java.util.ArrayList;
 
 public class OrderListActivity extends AppCompatActivity {
-
+    private static OrderListActivity instance;
     public OrderList orderList = new OrderList();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.order_list);
+        instance = this;
         ButtonCLick();
 
+    }
+    public static OrderListActivity getInstance() {
+        return instance;
     }
     private void ButtonCLick()
     {
         double totalMoney = 0;
-        OrderItem item = new OrderItem();
-        OrderItem item2 = new OrderItem();
-        item.setName("Mc Donald");
-        item.setPrice(10.5);
-        item.setQuantity(1);
-        orderList.addItem(item);
-        item2.setName("KFC");
-        item2.setPrice(5);
-        item2.setQuantity(2);
-        orderList.addItem(item2);
         ArrayList<OrderItem> hello = (ArrayList) orderList.getOrderList();
         for(int i=0;i<hello.size();i++)
         {
@@ -52,8 +46,10 @@ public class OrderListActivity extends AppCompatActivity {
     }
     public void updateUI(View view)
     {
+        OrderList list2 = new OrderList();
+
         double totalMoney = 0;
-        ArrayList<OrderItem> hello = (ArrayList) orderList.getOrderList();
+        ArrayList<OrderItem> hello = (ArrayList) list2.getOrderList();
         for(int i=0;i<hello.size();i++)
         {
             Log.i("item",hello.get(i).getName());

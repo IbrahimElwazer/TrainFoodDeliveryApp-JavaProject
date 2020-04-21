@@ -2,6 +2,7 @@ package train.food.delivery.app;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -50,9 +51,11 @@ public class OrderAdapter extends ArrayAdapter<OrderItem> {
             public void onClick(View view) {
                 int newQ = item.getQuantity() + 1;
                 hello.changeQuantity(newQ , item);
-                quantity.setText(Integer.toString(newQ));
+                //quantity.setText(Integer.toString(newQ));
+                OrderListActivity.getInstance().updateUI(view);
             }
         });
+
         substrastButton = (Button)convertView.findViewById(R.id.substrastQuantity);
         substrastButton.setTag(position);
         substrastButton.setOnClickListener(new View.OnClickListener() {
@@ -66,8 +69,10 @@ public class OrderAdapter extends ArrayAdapter<OrderItem> {
                 }
                 else {
                     hello.changeQuantity(newQ, item);
+                    //OrderListActivity.getInstance().updateUI(view);
                 }
-                quantity.setText(Integer.toString(newQ));
+                OrderListActivity.getInstance().updateUI(view);
+                //quantity.setText(Integer.toString(newQ));
             }
         });
         removeButton = (Button)convertView.findViewById(R.id.removeItem);
@@ -78,7 +83,8 @@ public class OrderAdapter extends ArrayAdapter<OrderItem> {
             public void onClick(View view) {
                 int newQ = 0;
                 hello.removeItem(item);
-                quantity.setText(Integer.toString(newQ));
+                //quantity.setText(Integer.toString(newQ));
+                OrderListActivity.getInstance().updateUI(view);
             }
         });
         // Return the completed view to render on screen

@@ -5,7 +5,7 @@ import android.util.Log;
 import java.util.ArrayList;
 
 public class OrderList {
-    private ArrayList<OrderItem> orderList = new ArrayList<OrderItem>();
+    private static ArrayList<OrderItem> orderList = new ArrayList<OrderItem>();
 
     public ArrayList<OrderItem> getOrderList() {
         return orderList;
