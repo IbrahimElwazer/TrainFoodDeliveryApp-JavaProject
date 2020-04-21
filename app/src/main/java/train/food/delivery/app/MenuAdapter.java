@@ -5,10 +5,13 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 
@@ -32,6 +35,9 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MenuViewHolder
     public void onBindViewHolder(@NonNull MenuViewHolder holder, int position) {
         holder.menu_item_name.setText(menu.get(position).getItem());
         holder.menu_item_price.setText(menu.get(position).getPrice());
+
+        Glide.with(mContext).load(menu.get(position).getImage()).into(holder.menu_item_image);
+
         holder.menu_item_name.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -56,12 +62,16 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MenuViewHolder
     public class MenuViewHolder extends RecyclerView.ViewHolder{
 
         TextView menu_item_name, menu_item_price;
+        ImageView menu_item_image;
+
 
         public MenuViewHolder(View itemView) {
             super(itemView);
 
             menu_item_name = itemView.findViewById(R.id.menu_item_name);
             menu_item_price = itemView.findViewById(R.id.menu_item_price);
+            menu_item_image = itemView.findViewById(R.id.menu_item_image);
+
         }
     }
 }
