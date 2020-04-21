@@ -47,7 +47,9 @@ public class RestaurantMenuActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.recycler_view_menu);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
+
         menuList = new ArrayList<Menu>();
+
 
         database = FirebaseDatabase.getInstance().getReference("menus").child(menuID);
         database.addValueEventListener(new ValueEventListener() {

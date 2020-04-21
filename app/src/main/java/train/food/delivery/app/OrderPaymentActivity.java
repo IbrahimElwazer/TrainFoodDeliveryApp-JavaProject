@@ -1,5 +1,6 @@
 package train.food.delivery.app;
 
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
@@ -13,8 +14,8 @@ public class OrderPaymentActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.order_payment);
-        btnConfirm = (Button) findViewById(R.id.confirm);
+        setContentView(R.layout.order_completion);
+        btnConfirm = (Button) findViewById(R.id.pay);
 
         btnConfirm.setOnClickListener(new View.OnClickListener() {
             @Override
