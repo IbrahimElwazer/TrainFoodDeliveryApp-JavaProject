@@ -39,7 +39,6 @@ public class RestaurantMenuActivity extends AppCompatActivity {
         if(!menuID.isEmpty() && menuID != null){
             loadRestaurantMenu(menuID);
         }
-
     }
 
     private void loadRestaurantMenu(String menuID) {
@@ -51,19 +50,19 @@ public class RestaurantMenuActivity extends AppCompatActivity {
         menuList = new ArrayList<Menu>();
 
 
-        database = FirebaseDatabase.getInstance().getReference("menus").child(menuID);
+                database = FirebaseDatabase.getInstance().getReference("menus").child(menuID);
         database.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
                 menuList.clear();
-                    for(DataSnapshot datasnapshot : dataSnapshot.getChildren()){
-                        String item = datasnapshot.getValue(Menu.class).getItem();
-                        String price = datasnapshot.getValue(Menu.class).getPrice();
+                for(DataSnapshot datasnapshot : dataSnapshot.getChildren()){
+                    String item = datasnapshot.getValue(Menu.class).getItem();
+                    String price = datasnapshot.getValue(Menu.class).getPrice();
 
-                        Menu results = new Menu(item, price);
-                        menuList.add(results);
-                    }
+                    Menu results = new Menu(item, price);
+                    menuList.add(results);
+                }
 
                 adapter = new MenuAdapter(RestaurantMenuActivity.this, menuList);
                 recyclerView.setAdapter(adapter);
