@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -38,7 +39,7 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MenuViewHolder
 
         Glide.with(mContext).load(menu.get(position).getImage()).into(holder.menu_item_image);
 
-        holder.menu_item_name.setOnClickListener(new View.OnClickListener() {
+        holder.add_item.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 OrderList orderList = new OrderList();
@@ -62,6 +63,7 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MenuViewHolder
     public class MenuViewHolder extends RecyclerView.ViewHolder{
 
         TextView menu_item_name, menu_item_price;
+        Button add_item;
         ImageView menu_item_image;
 
 
@@ -71,6 +73,7 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MenuViewHolder
             menu_item_name = itemView.findViewById(R.id.menu_item_name);
             menu_item_price = itemView.findViewById(R.id.menu_item_price);
             menu_item_image = itemView.findViewById(R.id.menu_item_image);
+            add_item = itemView.findViewById(R.id.add_item);
 
         }
     }
