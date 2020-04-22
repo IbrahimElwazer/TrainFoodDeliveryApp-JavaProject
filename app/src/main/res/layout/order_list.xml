@@ -31,17 +31,17 @@
         android:id="@+id/totalMoney"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Total price"
-        android:textStyle="bold"
         android:layout_marginTop="10dp"
+        android:text="Total price"
         android:textColor="@android:color/black"
         android:textSize="25dp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.124"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/orderList"
-        app:layout_constraintVertical_bias="0.025"
+        app:layout_constraintVertical_bias="0.094"
         tools:ignore="MissingConstraints"></TextView>
 
     <View
