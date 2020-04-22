@@ -15,10 +15,9 @@
         android:text="Start by entering your train journey information"
         android:textAlignment="center"
         android:textColor="#000000"
-        android:textSize="30dp"
+        android:textSize="25sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -35,8 +34,7 @@
         android:textColor="#000000"
         android:textSize="16dp"
         app:layout_constraintBottom_toTopOf="@id/departure_city_input"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintLeft_toLeftOf="@id/departure_city_input"
+        app:layout_constraintStart_toStartOf="@+id/departure_city_input"
         app:layout_constraintRight_toRightOf="@id/departure_city_input"
         app:layout_constraintTop_toBottomOf="@id/train_input_title"
         app:layout_constraintVertical_bias="1.0" />
@@ -54,23 +52,24 @@
         android:textSize="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.533"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.314" />
+        app:layout_constraintVertical_bias="0.287" />
 
     <TextView
         android:id="@+id/arrival_city_title"
         android:layout_width="153dp"
         android:layout_height="23dp"
-        android:layout_marginEnd="176dp"
+        android:layout_marginBottom="4dp"
         android:paddingLeft="10dp"
-        android:paddingBottom="5dp"
         android:text="Arrival City"
         android:textColor="#000000"
         android:textSize="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toTopOf="@id/arrival_city_input"
-        app:layout_constraintLeft_toLeftOf="@id/arrival_city_input"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/arrival_city_input"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0" />
 
@@ -87,12 +86,11 @@
         android:textSize="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.438"
+        app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintLeft_toLeftOf="@+id/arrival_city_title"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.499" />
-
+        app:layout_constraintVertical_bias="0.493" />
 
     <TextView
         android:id="@+id/train_number"
@@ -123,11 +121,12 @@
         android:textSize="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.533"
         app:layout_constraintLeft_toLeftOf="@+id/departure_city_input"
         app:layout_constraintRight_toRightOf="@+id/departure_city_input"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.704" />
+        app:layout_constraintVertical_bias="0.702" />
 
     <Button
         android:id="@+id/map"
@@ -141,9 +140,9 @@
         android:textSize="14dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintHorizontal_bias="0.592"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/train_input_title"
-        app:layout_constraintVertical_bias="0.846" />
+        app:layout_constraintVertical_bias="0.838" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

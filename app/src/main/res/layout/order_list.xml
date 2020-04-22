@@ -28,19 +28,40 @@
     </ListView>
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@android:color/black"
         android:id="@+id/totalMoney"
-        app:layout_constraintTop_toBottomOf="@+id/orderList"
-        tools:ignore="MissingConstraints" >
-    </TextView>
-    <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="Total price"
+        android:textStyle="bold"
+        android:layout_marginTop="10dp"
+        android:textColor="@android:color/black"
+        android:textSize="25dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.124"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/orderList"
+        app:layout_constraintVertical_bias="0.025"
+        tools:ignore="MissingConstraints"></TextView>
+
+    <View
+        android:layout_width="match_parent"
+        app:layout_constraintTop_toTopOf="@+id/totalMoney"
+        android:layout_height="0.5dp"
+        android:background="@android:color/darker_gray"
+        tools:ignore="MissingConstraints" />
+
+    <Button
         android:id="@+id/payment"
-        android:text="Proceed payment"
+        android:layout_width="280dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/rounded_corners"
+        android:text="Proceed to payment"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/totalMoney"
-        tools:ignore="MissingConstraints">
-    </Button>
+        app:layout_constraintVertical_bias="0.781"
+        tools:ignore="MissingConstraints"></Button>
 </androidx.constraintlayout.widget.ConstraintLayout>

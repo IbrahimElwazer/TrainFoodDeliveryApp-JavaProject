@@ -48,14 +48,19 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
         <activity
             android:name=".OrderListActivity">
 
         </activity>
-        <activity android:name=".OrderPaymentActivity"/>
-        <activity android:name=".thankYou"></activity>
+        <activity android:name=".OrderPaymentActivity"
+
+            />
+        <activity android:name=".thankYou">
+
+
+
+        </activity>
     </application>
 
 </manifest>

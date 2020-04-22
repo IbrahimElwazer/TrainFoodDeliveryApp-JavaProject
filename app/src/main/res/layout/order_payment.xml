@@ -98,10 +98,10 @@
 
     <TextView
         android:id="@+id/seat_number"
-        android:layout_width="150dp"
+        android:layout_width="190dp"
         android:layout_height="wrap_content"
         android:paddingBottom="5dp"
-        android:text="Seat Number"
+        android:text="Deck and Seat Number"
         android:textColor="#000000"
         android:textSize="16dp"
         android:paddingLeft="10dp"
@@ -117,7 +117,7 @@
         android:layout_width="240dp"
         android:layout_height="50dp"
         android:background="@drawable/rounded_inputs"
-        android:hint="Enter your seat number.."
+        android:hint="Enter deck and seat number.."
         android:paddingLeft="10dp"
         android:textColor="@android:color/black"
         android:textColorHint="#B6A5A5"

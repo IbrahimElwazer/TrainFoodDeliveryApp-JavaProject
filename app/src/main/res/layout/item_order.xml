@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
+    android:layout_marginTop="3dp"
     android:layout_height="50dp">
     <TableRow
         android:id="@+id/simpleTableLayout"
         android:layout_width="fill_parent"
+        android:layout_marginTop="10dp"
         android:layout_height="wrap_content">
 
         <RelativeLayout
@@ -18,6 +20,8 @@
                 android:layout_height="wrap_content"
                 android:textColor="@android:color/black"
                 android:gravity="center"
+                android:layout_marginLeft="10dp"
+                android:textSize="20sp"
                 android:text="Name">
             </TextView>
         </RelativeLayout>
@@ -26,14 +30,16 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@android:color/black"
-        android:layout_marginRight ="5dp"
+        android:layout_marginRight ="25dp"
+        android:textSize="20sp"
         android:text="Price">
     </TextView>
     <Button
         android:layout_width="25dp"
         android:layout_height="25dp"
         android:id="@+id/addQuantity"
-        android:background="@drawable/round_button"
+        android:layout_marginBottom="5dp"
+        android:background="@drawable/rounded_corners"
         android:text="+">
     </Button>
     <TextView
@@ -43,23 +49,31 @@
         android:textColor="@android:color/black"
         android:layout_marginLeft ="5dp"
         android:layout_marginRight ="5dp"
+        android:textSize="20sp"
         android:text="Quantity">
 
     </TextView>
     <Button
         android:layout_width="25dp"
         android:layout_height="25dp"
+        android:layout_marginBottom="5dp"
         android:id="@+id/substrastQuantity"
-        android:background="@drawable/round_button"
+        android:background="@drawable/rounded_corners"
         android:text="-">
     </Button>
     <Button
         android:layout_width="25dp"
         android:layout_height="25dp"
+        android:layout_marginBottom="5dp"
         android:id="@+id/removeItem"
-        android:background="@drawable/round_button"
-        android:text="x"
-        android:layout_marginLeft="2dp">
+        android:background="@drawable/rounded_corners_red"
+        android:text="X"
+        android:layout_marginHorizontal="5dp">
     </Button>
     </TableRow>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@android:color/darker_gray"
+        />
 </RelativeLayout>
