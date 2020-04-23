@@ -238,7 +238,7 @@ public class TrainMapsActivity extends FragmentActivity implements OnMapReadyCal
             } catch (ParseException e) {
                 e.printStackTrace();
             }
-            Log.i("time dif",s2);
+            Log.i("dif",s2);
             DateFormat dateFormat = new SimpleDateFormat("hh:mm:ss");
             String strDate = dateFormat.format(formattedDate);
             Log.i("time2", strDate);
@@ -250,6 +250,7 @@ public class TrainMapsActivity extends FragmentActivity implements OnMapReadyCal
             {
                 mMap.addMarker(new MarkerOptions().position(newStation).title(station.get(i).getStationName()).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE)));
                 mMap.setOnInfoWindowClickListener(this);
+                Log.i("marker" ,strDate);
             }
         }
         /*googleMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {

@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.android.volley.Request;
@@ -192,6 +193,8 @@ public class TrainInputActivity extends AppCompatActivity implements View.OnClic
     public void onClick(View view) {
         if(view.getId() == id.map)
         {
+            ProgressBar progressBar = (ProgressBar) findViewById(R.id.progressBar);
+            progressBar.setVisibility(View.VISIBLE);
             //queue = Volley.newRequestQueue(this);
             translate();
             setTimeout(this::loadTrain, 3000);
